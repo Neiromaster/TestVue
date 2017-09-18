@@ -2,9 +2,8 @@
   <select v-model="selected">
     <option
       v-if="placeholder"
-      :value="null"
-      selected
-    >
+      value=""
+      selected>
       {{ placeholder }}
     </option>
     <slot></slot>
@@ -15,22 +14,16 @@
   export default {
     name: 'my-select',
     props: {
-      value: {
-        type: [String, Number, Boolean, Object, Array, Symbol, Function],
-        default: null,
-      },
       items: [String, Array],
       placeholder: String,
     },
     data() {
       return {
-        selected: this.value,
+        selected: '',
       };
     },
+    methods: {},
     watch: {
-      value(value) {
-        this.selected = value;
-      },
       selected(value) {
         this.$emit('input', value);
       },

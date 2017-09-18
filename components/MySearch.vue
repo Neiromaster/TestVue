@@ -1,7 +1,12 @@
 <template>
-  <div class="search-box">
-    <input type="text" :placeholder="placeholder" id="search" name="search" :value="pattern" @input="input">
-    <button class="search-box-search-btn" type="submit" title="Найти"></button>
+  <div class="search-field">
+    <input type="text"
+           :placeholder="placeholder"
+           v-model="searchText"
+           @focus="selectAll">
+    <button class="search-btn"
+            @click.prevent="runSearch"
+            title="Найти"></button>
   </div>
 </template>
 
@@ -9,19 +14,25 @@
   export default {
     name: 'my-select',
     props: {
-      value: {
-        type: [String, Number, Boolean, Object, Array, Symbol, Function],
-        default: null,
-      },
       placeholder: String,
-      pattern: String,
     },
     data() {
       return {
-        text: this.value,
+        searchText: '',
       };
     },
-    watch: {},
+    methods: {
+      runSearch() {
+        this.$emit('search', this.searchText);
+      },
+      selectAll(event) {
+        // Workaround for Safari bug
+        // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
+        setTimeout(() => {
+          event.target.select();
+        }, 0);
+      },
+    },
   };
 </script>
 
@@ -36,11 +47,11 @@
     }
   }
 
-  .search-box {
+  .search-field {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    &-search-btn {
+    .search-btn {
       overflow: visible;
       width: 32px;
       height: 32px;
