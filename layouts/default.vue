@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
   html {
     font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
@@ -14,11 +14,22 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
+    body {
+      margin: 0;
+    }
   }
 
-  *, *:before, *:after {
+  * {
     box-sizing: border-box;
-    margin: 0;
+    &:before, &:after {
+      margin: 0;
+    }
+  }
+
+  ul {
+    font-weight: normal;
+    font-size: 1em;
+    color: #3c3c3b;
   }
 
   .form input[type="text"],
@@ -44,6 +55,7 @@
     vertical-align: middle;
     border: 1px solid #706f6f;
     border-radius: 6px;
+    outline: none;
   }
 
   .button--green {
